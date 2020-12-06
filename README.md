@@ -1,4 +1,3 @@
-# automate-the-boring-stuff
-Automate the Boring Stuff by Al Sweigart
+# Automate the Boring Stuff by Al Sweigart
 
-Codes from this module
+All codes from this module, in my own way.

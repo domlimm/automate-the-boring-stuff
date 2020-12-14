@@ -1,7 +1,5 @@
-import bs4
+from bs4 import BeautifulSoup
 import requests
-
-# Amazon does not allow web scraping.
 
 def getPrice(url):
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) \
@@ -10,13 +8,11 @@ def getPrice(url):
     res = requests.get(url, headers=headers)
 
     if res.raise_for_status() == None:
-        soup = bs4.BeautifulSoup(res.text, 'html.parser')
-        element = soup.select('#main > div > div._1Bj1VS > div.page-product > div.container > div.product-briefing.flex.card._2cRTS4 > div.flex.flex-auto.k-mj2F > div > div:nth-child(3) > div > div > div > div > div > div')
-        price = element[0].text.strip()
+        soup = BeautifulSoup(res.text, 'html.parser')
+        price = soup.find('h2', class_='K6KjbGieCG')
+        return price.text.strip()
 
-        return price
-
-price = getPrice('''https://shopee.sg/%F0%9F%87%B8%F0%9F%87%AC%F0%9F%94%
-        A5Ready-Stock%F0%9F%94%A5Wood-Parallettes-Handstand-Pushups-Stands-Bars-
-        Gymnastic-Russian-Style-Stretch-Push-Ups-Double-Rod-i.181654948.5932438192''')
-print('The price is ' + price)
+price = getPrice('''https://www.carousell.sg/p/
+        corsair-4000d-tempered-glass-mid-tower-atx-pc-case-non-led-120mm-fans-x-2-
+        included-white-or-black-1044966059/''')
+print('The price is ' + str(price))

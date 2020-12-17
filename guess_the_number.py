@@ -7,7 +7,6 @@ guessed = 0
 
 print('I\'m thinking of a number between 1 and 20.')
 print(guessText)
-print(str(genNum))
 
 # 5 guesses available
 while guessed < 5:
